@@ -37,10 +37,13 @@ def update_config(verb_name, commands):
             f.seek(0)
             config = yaml.safe_load(f) or {}
             config.setdefault('full_captures', {})
-            if config['full_captures'].get(verb_name, []) == commands:
+            if (
+                config['full_captures'].get(verb_name, []) == commands and
+                config.get('last_verb') == verb_name
+            ):
                 return
-            else:
-                config['full_captures'][verb_name] = commands
+            config['full_captures'][verb_name] = commands
+            config['last_verb'] = verb_name
             f.seek(0)
             f.truncate()
             yaml.dump(config, f, default_style="'")

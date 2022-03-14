@@ -55,7 +55,7 @@ class ReRunVerb(VerbExtensionPoint):
 
     def add_arguments(self, *, parser):  # noqa: D102
         parser.add_argument(
-            'verb_to_run',
+            'verb_to_run', nargs='?',
             help='The verb to re-run')
         parser.add_argument(
             'additional_args', nargs='*', type=str.lstrip, default=[],
@@ -63,6 +63,12 @@ class ReRunVerb(VerbExtensionPoint):
 
     def main(self, *, context):  # noqa: D102
         config_content = get_config()
+
+        if not context.args.verb_to_run:
+            context.args.verb_to_run = config_content.get('last_verb')
+            if not context.args.verb_to_run:
+                raise RuntimeError(
+                    'No previously recorded invocation to re-run')
 
         _disable_capture()
 
