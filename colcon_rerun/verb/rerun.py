@@ -56,7 +56,7 @@ class ReRunVerb(VerbExtensionPoint):
     def add_arguments(self, *, parser):  # noqa: D102
         parser.add_argument(
             'verb_to_run', nargs='?',
-            help='The verb to re-run')
+            help='The verb to re-run (default: most recent verb)')
         parser.add_argument(
             'additional_args', nargs='*', type=str.lstrip, default=[],
             help='Additional arguments to pass to the command')
