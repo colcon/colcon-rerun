@@ -8,7 +8,8 @@ from colcon_core.command import add_subparsers
 from colcon_core.command import CommandContext
 from colcon_core.command import create_parser
 from colcon_core.command import verb_main
-from colcon_core.entry_point import EXTENSION_BLOCKLIST_ENVIRONMENT_VARIABLE
+from colcon_core.extension_point \
+    import EXTENSION_BLOCKLIST_ENVIRONMENT_VARIABLE
 from colcon_core.logging import colcon_logger
 from colcon_core.plugin_system import satisfies_version
 from colcon_core.verb import get_verb_extensions
